@@ -14,5 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/blog', function () {
-    return view('blog');
+    return view('blog-posts');
 });
+
+Route::get('/blog/{post}', function ($slug) {
+
+    if (! file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html" )) {
+        return redirect('/blog');
+    }
+
+    $post = cache()->remember("blog.{slug}", now()->addMinutes(20), fn() => file_get_contents($path));
+
+    return view('blog-post', ['post' => $post]);
+})->where('post', '[A-z_\-]+');
