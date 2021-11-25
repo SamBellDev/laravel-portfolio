@@ -10,18 +10,17 @@
     </head>
 
 <body>
+    <?php foreach ($posts as $post) : ?>
     <article>
-        <h2><a href="/blog/my-first-post">My first post!</a></h2>
-        <p>Lorem Ipsum who? </p>
-    </article>
+        <h2>
+            <a href="/blog/<?= $post->slug; ?>">
+                <?= $post->title; ?>
+            </a>
+        </h2>
 
-    <article>
-        <h2><a href="/blog/my-second-post">My second post!</a></h2>
-        <p>Lorem Ipsum who? </p>
+        <div>
+            <?= $post->excerpt; ?>
+        </div>
     </article>
-
-    <article>
-        <h2><a href="/blog/my-third-post">My third post!</a></h2>
-        <p>Lorem Ipsum who? </p>
-    </article>
+    <?php endforeach; ?>
 </body>
